@@ -38,11 +38,9 @@ public class MainController {
     @RequestMapping(value = "/check-user",method = RequestMethod.POST)
     public ModelAndView checkUser(@ModelAttribute("userJSP") User user) {
         ModelAndView modelAndView = new ModelAndView();
-        if (user.getName().equals("")&&user.getPassword().equals("")) {
+        if (user.getName().equals("") && user.getPassword().equals("")) {
             modelAndView.setViewName("error");
-        }
-
-        if (user.getName().equals("BeNdEr") && user.getPassword().equals("09707")) {
+        } else if (user.getName().equals("BeNdEr") && user.getPassword().equals("09707")) {
             modelAndView.setViewName("admin");
         } else {
             modelAndView.setViewName("secondPage");
