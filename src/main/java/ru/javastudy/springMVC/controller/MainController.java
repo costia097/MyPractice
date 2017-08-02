@@ -35,15 +35,18 @@ public class MainController {
     <spring:form method="post"  modelAttribute="userJSP" action="check-user">,
     то попадем вот сюда
      */
-    @RequestMapping(value = "/check-user")
+    @RequestMapping(value = "/check-user",method = RequestMethod.POST)
     public ModelAndView checkUser(@ModelAttribute("userJSP") User user) {
         ModelAndView modelAndView = new ModelAndView();
+        if (user.getName().equals("")&&user.getPassword().equals("")) {
+            modelAndView.setViewName("error");
+        }
 
-        //имя представления, куда нужно будет перейти
-        modelAndView.setViewName("secondPage");
-
-        //записываем в атрибут userJSP (используется на странице *.jsp объект user
-        modelAndView.addObject("userJSP", user);
+        if (user.getName().equals("BeNdEr") && user.getPassword().equals("09707")) {
+            modelAndView.setViewName("admin");
+        } else {
+            modelAndView.setViewName("secondPage");
+        }
 
         return modelAndView; //после уйдем на представление, указанное чуть выше, если оно будет найдено.
     }
